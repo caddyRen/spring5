@@ -8,7 +8,7 @@
         <property name="name" value="李二狗"/>
         <!-- 内部bean注入-->
         <property name="dept" ref="dept"/>
-        <!-- 需要dept的get方法 会覆盖掉”人事“字面量-->
+        <!-- 需要获取dept的get方法 此处会覆盖掉，初始化dept时候赋的”人事“值 -->
         <property name="dept.name" value="财务"/>
 
     </bean>

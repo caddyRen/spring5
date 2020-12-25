@@ -6,6 +6,7 @@ import java.util.Map;
 
 /**
  * 注入集合
+ * @author renqiankun
  */
 public class Stu {
 

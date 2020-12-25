@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * 集合注入
+ * @author renqiankun
  */
 public class StuTest {
     @Test

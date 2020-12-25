@@ -1,7 +1,7 @@
 package org.bougainvillea.spring5.ioc;
 
 /**
- * DI
+ * DI 注入属性~依赖注入
  *
  * @author renqiankun
  */

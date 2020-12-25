@@ -2,6 +2,10 @@ package org.bougainvillea.spring5.ioc.service;
 
 import org.bougainvillea.spring5.ioc.dao.UserDao;
 
+/**
+ * 注入外部bean
+ * @author renqiankun
+ */
 public class UserService {
 
     UserDao userDao;

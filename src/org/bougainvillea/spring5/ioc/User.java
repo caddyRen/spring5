@@ -2,6 +2,7 @@ package org.bougainvillea.spring5.ioc;
 
 /**
  * create Plain Ordinary Java Object
+ *
  * @author renqiankun
  */
 public class User {
