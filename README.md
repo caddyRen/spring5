@@ -29,6 +29,17 @@ spring framework 5.2.6 study
 ### 管理Bean
 1. 创建对象
 2. 注入属性
+#### bean生命周期
+1. 通过构造器创建bean实例（有参构造器，无参构造器，工厂bean）
+2. DI 注入属性（set方法，ref引用）
+3.1 把bean实例传递给bean后置处理器的方法
+3.2 调用bean初始化方法（需要配置）
+3.3 把bean实例传递给bean后置处理器的方法
+4. bean可以使用（获取对象）
+5. 当容器关闭时，调用bean的销毁方法（需要进行配置销毁的方法）
+- 后置处理器
+    1. 创建类 实现BeanPostProcessor接口
+    2. 默认会将当前配置文件内的所有bean都配置上后置处理器
 #### bean作用域 scope
 - 单例（Spring默认值）singleton
 ```xml
