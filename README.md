@@ -29,6 +29,11 @@ spring framework 5.2.6 study
 ### 管理Bean
 1. 创建对象
 2. 注入属性
+#### POJOBean（普通Bean） & FactoryBean（工厂bean）
+- 普通bean：在配置文件中定义bean类型=返回的类型
+- 工厂bean：在配置文件中定义bean类型≠返回的类型
+    - 创建类作为工厂Bean 实现FactoryBean
+    - 实现接口方法，在实现的方法中定义返回的bean类型
 #### 基于XML
 1. 创建对象
     - 默认找无参构造器创建对象
