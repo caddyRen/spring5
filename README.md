@@ -10,6 +10,7 @@ spring framework 5.2.6 study
 - spring-core-5.2.6.RELEASE.jar
 - spring-expression-5.2.6.RELEASE.jar
 - druid-1.1.20.jar
+- spring-aop-5.2.6.RELEASE.jar
 
 ## IOC
 1. 控制反转-把对象创建和对象之间的调用过程，交给spring管理
@@ -30,46 +31,33 @@ spring framework 5.2.6 study
 ### 管理Bean
 1. 创建对象
 2. 注入属性
-#### 自动装配
-1. 根据指定装配规则（属性名称或者属性类型），Spring自动将匹配的属性值注入，一种简化写法
-
-#### bean生命周期
-1. 通过构造器创建bean实例（有参构造器，无参构造器，工厂bean）
-2. DI 注入属性（set方法，ref引用）
-3.1 把bean实例传递给bean后置处理器的方法
-3.2 调用bean初始化方法（需要配置）
-3.3 把bean实例传递给bean后置处理器的方法
-4. bean可以使用（获取对象）
-5. 当容器关闭时，调用bean的销毁方法（需要进行配置销毁的方法）
-- 后置处理器
-    1. 创建类 实现BeanPostProcessor接口
-    2. 默认会将当前配置文件内的所有bean都配置上后置处理器
-#### bean作用域 scope
-- 单例（Spring默认值）singleton
-```xml
-<bean id="book" class="org.bougainvillea.spring5.ioc.Book" scope="singleton"/>
-```
-- 多例 prototype
-```xml
-<bean id="book" class="org.bougainvillea.spring5.ioc.Book" scope="prototype"/>
-```
-- 区别
-    - singleton单例,prototype多例
-    - singleton加载配置文件时就会创建一个单例对象
-    - prototype在获取bean ```context.getBean("book", Book.class)``` 时才创建对象
-- 不常用值
-    - request
-    - session
-#### POJOBean（普通Bean） & FactoryBean（工厂bean）
-- 普通bean：在配置文件中定义bean类型=返回的类型
-- 工厂bean：在配置文件中定义bean类型≠返回的类型
-    - 创建类作为工厂Bean 实现FactoryBean
-    - 实现接口方法，在实现的方法中定义返回的bean类型
+#### 基于annotation 引入spring-aop-5.2.6.RELEASE.jar
+- 注解
+    1. 注解是代码特殊标记。格式：@注解名(属性名=属性值,属性名=属性值)
+    2. 可以作用在类，方法，属性上面  @Service、@Test、@Value、@Override
+    3. 注解简化xml配置===>SpringBoot
+- Spring提供的创建对象的注解，注意：四个注解功能一样，都能创建对象，只是为了web应用分层更清晰，约定大于规范
+    1. @Component 普通
+    2. @Service 业务逻辑层
+    3. @Controller web层
+    4. @Repository dao层
+- 使用
+    1. 引入context名称空间开启组件扫描，设置扫描范围```<context:component-scan base-package="org.bougainvillea.spring5.ioc.annotation"/>``
+    2. 使用注解
+##### 注解注入属性
+- POJO属性注入
+    -  @Autowired 跟据属性类型自动装配
+    -  @Qualifier 根据属性名注入
+    -  @Resource  可以根据属性名称注入，可以根据属性类型注入
+        - 不是Spring包中注解 import javax.annotation.Resource;
+        - 建议使用Autowired，Qualifier
+- 注入普通类型
+    - @Value
 #### 基于XML
 1. 创建对象
     - 默认找无参构造器创建对象
     ```xml
-    <bean id="user" class="org.bougainvillea.spring5.ioc.User"></bean>
+    <bean id="user" class="org.bougainvillea.spring5.ioc.xml.User"></bean>
    ```
    - id属性：唯一标识 不能重复 不能有特殊符合
    - class属性：包类全路径
@@ -81,11 +69,45 @@ spring framework 5.2.6 study
             - 注入特殊字符 <![CDATA[<<西游记>>]]>
             - 注入空值 <null/>
         - 注入bean ref注入，内部bean注入，需要有get方法的内部bean注入写法
-        
     - 有参构造器注入
+##### POJOBean（普通Bean） & FactoryBean（工厂bean）
+- 普通bean：在配置文件中定义bean类型=返回的类型
+- 工厂bean：在配置文件中定义bean类型≠返回的类型
+    - 创建类作为工厂Bean 实现FactoryBean
+    - 实现接口方法，在实现的方法中定义返回的bean类型
+##### bean作用域 scope
+- 单例（Spring默认值）singleton
+```xml
+<bean id="book" class="org.bougainvillea.spring5.ioc.xml.Book" scope="singleton"/>
+```
+- 多例 prototype
+```xml
+<bean id="book" class="org.bougainvillea.spring5.ioc.xml.Book" scope="prototype"/>
+```
+- 区别
+    - singleton单例,prototype多例
+    - singleton加载配置文件时就会创建一个单例对象
+    - prototype在获取bean ```context.getBean("book", Book.class)``` 时才创建对象
+- 不常用值
+    - request
+    - session
+##### bean生命周期
+1. 通过构造器创建bean实例（有参构造器，无参构造器，工厂bean）
+2. DI 注入属性（set方法，ref引用）
+3.1 把bean实例传递给bean后置处理器的方法
+3.2 调用bean初始化方法（需要配置）
+3.3 把bean实例传递给bean后置处理器的方法
+4. bean可以使用（获取对象）
+5. 当容器关闭时，调用bean的销毁方法（需要进行配置销毁的方法）
+- 后置处理器
+    1. 创建类 实现BeanPostProcessor接口
+    2. 默认会将当前配置文件内的所有bean都配置上后置处理器
+##### 自动装配
+1. 根据指定装配规则（属性名称或者属性类型），Spring自动将匹配的属性值注入，一种简化写法
     
 
-#### 基于annotation
+
+
 
 ## AOP
 ## JdbcTemplate
