@@ -29,6 +29,22 @@ spring framework 5.2.6 study
 ### 管理Bean
 1. 创建对象
 2. 注入属性
+#### bean作用域 scope
+- 单例（Spring默认值）singleton
+```xml
+<bean id="book" class="org.bougainvillea.spring5.ioc.Book" scope="singleton"/>
+```
+- 多例 prototype
+```xml
+<bean id="book" class="org.bougainvillea.spring5.ioc.Book" scope="prototype"/>
+```
+- 区别
+    - singleton单例,prototype多例
+    - singleton加载配置文件时就会创建一个单例对象
+    - prototype在获取bean ```context.getBean("book", Book.class)``` 时才创建对象
+- 不常用值
+    - request
+    - session
 #### POJOBean（普通Bean） & FactoryBean（工厂bean）
 - 普通bean：在配置文件中定义bean类型=返回的类型
 - 工厂bean：在配置文件中定义bean类型≠返回的类型
