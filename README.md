@@ -104,12 +104,24 @@ spring framework 5.2.6 study
     2. 默认会将当前配置文件内的所有bean都配置上后置处理器
 ##### 自动装配
 1. 根据指定装配规则（属性名称或者属性类型），Spring自动将匹配的属性值注入，一种简化写法
-    
-
-
-
 
 ## AOP
+1. 面向切面编程，aop是oop的延续，利用aop可以对业务逻辑的各个部分进行隔离，从而使业务逻辑各部分之间耦合度降低，提高程序的可重复性，提高开发效率
+2. 场景：日志，性能统计，安全控制，事务处理，异常处理等从业务代码中分出来，可以在不修改源代码的情况下，增加主业务功能
+### 底层原理
+#### 动态代理
+##### 有接口jdk动态代理
+- java.lang.reflect.Proxy
+    - 方法：newProxyInstance(ClassLoader loader,Class<?>[] interfaces,InvocationHandler h);返回指定接口的代理类的实例，该接口将方法调用分派给指定的调用处理程序
+    - 参数
+        - ClassLoader loader: 类加载器
+        - Class<?>[] interfaces: 需要增强的方法所在的类所实现的接口，支持多个接口
+        - InvocationHandler h: 实现这个接口InvocationHandler，创建代理对象，写增强方法
+
+##### 无接口cgLib代理
+
+
+
 ## JdbcTemplate
 ## Transaction
 ## new
