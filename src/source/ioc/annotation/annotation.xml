@@ -7,7 +7,7 @@
 <!--    开启组件扫描
     1. 扫描多个包使用逗号隔开，扫描base-package全部
 -->
-    <context:component-scan base-package="org.bougainvillea.spring5.ioc.annotation"></context:component-scan>
+<!--    <context:component-scan base-package="org.bougainvillea.spring5.ioc.annotation"></context:component-scan>-->
 
 
     <!-- 不扫描base-package全部，只扫描指定标签-->
