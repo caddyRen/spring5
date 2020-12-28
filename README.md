@@ -11,7 +11,10 @@ spring framework 5.2.6 study
 - spring-expression-5.2.6.RELEASE.jar
 - druid-1.1.20.jar
 - spring-aop-5.2.6.RELEASE.jar
-
+- spring-aspects-5.2.6.RELEASE.jar
+- aopalliance-1.0.jar
+- aspectjweaver-1.6.8.jar
+- cglib-2.2.2.jar
 ## IOC
 1. 控制反转-把对象创建和对象之间的调用过程，交给spring管理
 2. 目的是降低耦合度
@@ -108,6 +111,7 @@ spring framework 5.2.6 study
 ## AOP
 1. 面向切面编程，aop是oop的延续，利用aop可以对业务逻辑的各个部分进行隔离，从而使业务逻辑各部分之间耦合度降低，提高程序的可重复性，提高开发效率
 2. 场景：日志，性能统计，安全控制，事务处理，异常处理等从业务代码中分出来，可以在不修改源代码的情况下，增加主业务功能
+3. 引入spring-aspects-5.2.6.RELEASE.jar、aopalliance-1.0.jar、aspectjweaver-1.6.8.jar、cglib-2.2.2.jar
 ### 底层原理
 #### 动态代理
 ##### 有接口jdk动态代理
@@ -119,9 +123,23 @@ spring framework 5.2.6 study
         - InvocationHandler h: 实现这个接口InvocationHandler，创建代理对象，写增强方法
 
 ##### 无接口cgLib代理
-
-
-
+### 术语
+- 连接点：类中可以被增强的方法
+- 切入点：类中具体实现了增强功能的方法
+- 通知 增强
+    - @Before 前置通知
+    - @AfterReturning  后置通知，有异常不会执行 日志
+    - @After 最终通知 类似finally 无论是否异常都会执行增强 常用于日志
+    - @Around 环绕通知 控制事务 权限控制
+    - @AfterThrowing 异常通知 异常处理 控制事务
+- 切面：动作 把增强应用到切入点的过程
+### AspectJ框架
+- AspectJ独立的AOP框架，不是Spring的组成部分
+- 把AspectJ框架和Spring框架一起使用进行AOP操作
+### 切入点表达式：execution
+- execution([权限修饰符][返回类型][类全路径][方法名称]([参数列表]))
+- execution(* org.bougainvillea.spring5.aop.Bean.add(..))对Bean下的add方法增强
+- execution(* org.bougainvillea.spring5.aop.Bean.*(..))对Bean下的所有方法增强
 ## JdbcTemplate
 ## Transaction
 ## new
