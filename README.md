@@ -15,6 +15,10 @@ spring framework 5.2.6 study
 - aopalliance-1.0.jar
 - aspectjweaver-1.6.8.jar
 - cglib-2.2.2.jar
+- spring-jdbc-5.2.6.RELEASE.jar
+- spring-orm-5.2.6.RELEASE.jar
+- spring-tx-5.2.6.RELEASE.jar
+- mysql-connector-java-8.0.21.jar
 ## IOC
 1. 控制反转-把对象创建和对象之间的调用过程，交给spring管理
 2. 目的是降低耦合度
@@ -141,5 +145,8 @@ spring framework 5.2.6 study
 - execution(* org.bougainvillea.spring5.aop.Bean.add(..))对Bean下的add方法增强
 - execution(* org.bougainvillea.spring5.aop.Bean.*(..))对Bean下的所有方法增强
 ## JdbcTemplate
+1. Spring对JDBC进行封装，使用JdbcTemplate对数据库操作
+2. 引入jar mysql-connector-java-8.0.21.jar、spring-jdbc-5.2.6.RELEASE.jar、spring-tx-5.2.6.RELEASE.jar、spring-orm-5.2.6.RELEASE.jar
 ## Transaction
+
 ## new
