@@ -148,5 +148,50 @@ spring framework 5.2.6 study
 1. Spring对JDBC进行封装，使用JdbcTemplate对数据库操作
 2. 引入jar mysql-connector-java-8.0.21.jar、spring-jdbc-5.2.6.RELEASE.jar、spring-tx-5.2.6.RELEASE.jar、spring-orm-5.2.6.RELEASE.jar
 ## Transaction
-
+- ACID
+    - 原子性：不可分割，一组操作要么都成功，一个失败全部回滚
+    - 一致性：操作前操作后总量不变，类似会计学有借必有贷，借贷必相等
+    - 隔离性：多事务操作时互不影响
+    - 持久性：数据变更后要提交，进行持久化
+- 数据库操作的基本单元，逻辑上一组操作要么都成功，一个失败全部回滚
+- 编程式事务管理
+- 声明式事务管理（推荐），底层是AOP
+    - 事务管理器接口PlatformTransactionManager
+      - 抽象子类AbstractPlatformTransactionManager
+        - 子类DataSourceTransactionManager（Mybatis，JdbcTemplate使用此实现类）
+        - 子类HibernateTransactionManager（Hibernate使用此实现类）
+- @Transactional
+    - 加到类上：所有方法都添加事务
+    - 加到方法上：该方法添加事务
+    - 参数（查看Transactional源码）
+      - 事务传播行为：Propagation propagation() default Propagation.REQUIRED;
+      - 事务隔离级别：Isolation isolation() default Isolation.DEFAULT;
+      - 超时时间：int timeout() default -1;
+      - 是否只读：boolean readOnly() default false;
+      - 回滚：Class<? extends Throwable>[] rollbackFor() default {};
+      - 不回滚：Class<? extends Throwable>[] noRollbackFor() default {};
+- Spring7种事务传播行为，查看Propagation枚举类
+    - 多事务方法之间进行调用，这个过程中事务是如何进行管理的
+    - 事务方法：对数据表数据进行变化的操作
+    - 有添加事务的方法调用未添加事务的方法
+    - 有添加事务方法调用添加事务的方法
+    - REQUIRED(0)如果有事务在进行，当前方法就在这个事务内进行，否则当前方法开启新事务，在新开的事务内进行
+      - 例子：有事务管理的A调用无事务管理的B，B会使用A的事务
+      - 例子：AB都没有事务，A调用B，B会开启新的事务
+    - SUPPORTS(1)如果有事务在进行，当前方法就在这个事务内进行，否则可以不在事务内运行
+    - MANDATORY(2)当前方法必须运行在事务内，如果当前没有事务，抛出异常，不会自动开启事务
+    - REQUIRES_NEW(3)当前方法必会启动新的事务，并在它自己的事务内运行，如果当前有事务正在运行，则将它挂起
+    - NOT_SUPPORTED(4)当前方法不应该运行在事务中，如果有运行的事务，将它挂起
+    - NEVER(5)当前方法不应该运行在事务中，如果有运行的事务，抛出异常
+    - NESTED(6)如果有事务在运行，当前的方法就应该在这个事务的嵌套事务内运行，否则就启动一个新的事务，并在它自己的事务内运行
+- 事务隔离级别
+    - 默认（数据库默认隔离级别，Mysql默认是可重复的）
+    - 读未提交(不可重复读，脏读，幻读)
+    - 读已提交（）
+    - 可重复读（写锁）
+    - 串行（读锁+写锁）
+    - 问题
+        - 脏读：读取到已修改，未提交的数据，回滚，造成读取到无效数据
+        - 不可重复读：一个事务select sum，一个事务修改sum的数据，当修改的事务未提交时，求和的事务读取到未提交前的数据，当修改的事务提交后，求和的事务得到修改后数据，造成两次结果不一致
+        - 幻读：读取到未提交的insert事务，insert事务回滚后发现读取到的结果并不存在
 ## new

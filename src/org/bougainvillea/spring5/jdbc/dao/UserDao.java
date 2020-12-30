@@ -21,4 +21,10 @@ public interface UserDao {
 
     int delete(int id);
     int[] batchDelete(int[] id);
+
+    /**
+     *事务
+     */
+    void reduceAge(int id,int num);
+    void addAge(int id,int num);
 }

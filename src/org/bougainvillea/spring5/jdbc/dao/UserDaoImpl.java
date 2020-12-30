@@ -2,7 +2,6 @@ package org.bougainvillea.spring5.jdbc.dao;
 
 import org.bougainvillea.spring5.jdbc.po.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -68,6 +67,8 @@ public class UserDaoImpl implements UserDao {
         return jdbcTemplate.batchUpdate(sql,args);
     }
 
+
+
     @Override
     public int[] batchDelete(int[] id) {
         String sql="delete from spring5_user where id=?";
@@ -101,5 +102,22 @@ public class UserDaoImpl implements UserDao {
         String sql="delete from spring5_user where id=?";
         Object[] args={id};
         return jdbcTemplate.update(sql,args);
+    }
+
+    /**
+     * 事务
+     */
+    @Override
+    public void reduceAge(int id,int num) {
+        String sql="update spring5_user set age=age-? where id=?";
+        Object[] args={num,id};
+        jdbcTemplate.update(sql,args);
+    }
+
+    @Override
+    public void addAge(int id,int num) {
+        String sql="update spring5_user set age=age+? where id=?";
+        Object[] args={num,id};
+        jdbcTemplate.update(sql,args);
     }
 }
