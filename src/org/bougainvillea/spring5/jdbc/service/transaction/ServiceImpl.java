@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+
 /**
  * 事务传播行为
  * 当使用DataSourceTransactionManager时使用的效果
@@ -111,7 +113,8 @@ public class ServiceImpl {
     @Autowired
     ServiceImpl1 serviceImpl1;
 
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.REPEATABLE_READ,readOnly = false,timeout = -1,rollbackFor ={NullPointerException.class, IOException.class},noRollbackFor = {ArithmeticException.class})
+//    @Transactional(propagation = Propagation.REQUIRED)
 //    @Transactional(propagation = Propagation.SUPPORTS)
 //    @Transactional(propagation = Propagation.MANDATORY)
 //    @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -120,8 +123,8 @@ public class ServiceImpl {
 //    @Transactional(propagation = Propagation.NESTED)
     public void age(int reduce,int add, int num){
         userDao.reduceAge(reduce,num);
-        serviceImpl1.age(reduce,add,num+1);
-//        int a=10/0;
+//        serviceImpl1.age(reduce,add,num+1);
+        int a=10/0;
         userDao.addAge(add,num);
     }
 

@@ -164,12 +164,12 @@ spring framework 5.2.6 study
     - 加到类上：所有方法都添加事务
     - 加到方法上：该方法添加事务
     - 参数（查看Transactional源码）
-      - 事务传播行为：Propagation propagation() default Propagation.REQUIRED;
+      - 类与类之间的事务传播行为：Propagation propagation() default Propagation.REQUIRED;
       - 事务隔离级别：Isolation isolation() default Isolation.DEFAULT;
-      - 超时时间：int timeout() default -1;
-      - 是否只读：boolean readOnly() default false;
-      - 回滚：Class<? extends Throwable>[] rollbackFor() default {};
-      - 不回滚：Class<? extends Throwable>[] noRollbackFor() default {};
+      - 超时时间(秒)：int timeout() default -1;事务需要在一定时间内进行提交,如果不提交就进行回滚
+      - 是否只读：boolean readOnly() default false;是否只查询,默认false,设true时,不能修改操作
+      - 回滚：Class<? extends Throwable>[] rollbackFor() default {};设置哪些异常进行事务回滚
+      - 不回滚：Class<? extends Throwable>[] noRollbackFor() default {};设置哪些异常不进行事务回滚
 - Spring7种事务传播行为，查看Propagation枚举类
     - 类与类之间 的多事务方法之间进行调用，这个过程中事务是如何进行管理的
     - 事务方法：对数据表数据进行变化的操作
