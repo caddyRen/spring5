@@ -2,10 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--    引入context名称空间-->
     <!--    开启组件扫描-->
@@ -25,17 +25,31 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--   配置事务管理器 -->
+    <!--   1.配置事务管理器 -->
     <bean id="datasourceTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <!--    开启事务注解-->
-    <tx:annotation-driven transaction-manager="datasourceTransactionManager"/>
+    <!--    2.配置增强,配置通知-->
+    <tx:advice id="txAdvice" transaction-manager="datasourceTransactionManager">
+        <!--        配置事务参数-->
+        <tx:attributes>
+            <!-- 设置事务传播行为 指定添加事务的方法 -->
+            <tx:method name="age" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--    3.配置切入点和切面-->
+    <aop:config>
+<!--        配置切入点-->
+        <aop:pointcut id="pt" expression="execution(* org.bougainvillea.spring5.jdbc.service.transaction.xml.ServiceImpl2.*(..))"/>
+<!--        配置切面-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt"/>
+    </aop:config>
 
-    <bean id="user" class="org.bougainvillea.spring5.jdbc.po.User">
-        <property name="name" value="李二狗"/>
-        <property name="age" value="10"/>
-        <property name="id" value="1"/>
+    <bean id="userDao" class="org.bougainvillea.spring5.jdbc.dao.UserDaoImpl">
+    </bean>
+
+    <bean id="serviceImpl" class="org.bougainvillea.spring5.jdbc.service.transaction.xml.ServiceImpl2">
+        <property name="userDao" ref="userDao" />
     </bean>
 </beans>
