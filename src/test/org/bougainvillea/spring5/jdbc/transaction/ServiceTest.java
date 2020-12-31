@@ -1,9 +1,12 @@
 package test.org.bougainvillea.spring5.jdbc.transaction;
 
 import org.bougainvillea.spring5.jdbc.service.transaction.ServiceImpl;
+import org.bougainvillea.spring5.jdbc.service.transaction.annotation.ServiceImpl3;
+import org.bougainvillea.spring5.jdbc.service.transaction.annotation.TxConfig;
 import org.bougainvillea.spring5.jdbc.service.transaction.xml.ServiceImpl2;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -22,6 +25,12 @@ public class ServiceTest {
     public void ageXml(){
         ApplicationContext context=new ClassPathXmlApplicationContext("source/jdbc/xml/datasource.xml");
         ServiceImpl2 serviceImpl = context.getBean("serviceImpl", ServiceImpl2.class);
+        serviceImpl.age(1,2,1);
+    }
+    @Test
+    public void ageAnnotation(){
+        ApplicationContext context=new AnnotationConfigApplicationContext(TxConfig.class);
+        ServiceImpl3 serviceImpl = context.getBean("serviceImpl3", ServiceImpl3.class);
         serviceImpl.age(1,2,1);
     }
 }
