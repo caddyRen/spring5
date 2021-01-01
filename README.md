@@ -225,3 +225,7 @@ spring framework 5.2.6 study
     }
   ```
 ### Spring5支持函数式风格GenericApplicationContext
+### Spring5支持整合JUnit5
+#### 整合JUnit4
+#### 整合JUnit5
+
