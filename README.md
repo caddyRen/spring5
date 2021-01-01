@@ -197,3 +197,31 @@ spring framework 5.2.6 study
 2. 配置增强
 3. 配置切入点和切面
 ## 新特性
+### 基于Java8，运行时兼容JDK9
+### Spring5整合Log4j2
+- 移除Log4jConfigListener,官方推荐使用
+- 整合Log4j2：
+    1. 引入jar
+       - log4j-api-2.12.1.jar
+       - log4j-core-2.12.1.jar
+       - log4j-slf4j-impl-2.12.1.jar
+       - slf4j-api-1.7.30.jar
+    2. 创建log4j2.xml配置文件（src/log4j2.xml）
+### Spring5 核心容器支持@Nullable注解
+- 使用在方法上，表示方法返回值可以为空
+- 使用在属性值上面，表示属性值可以为空
+- 使用在参数上面，表示参数可以为空
+  ```java
+  
+    import org.springframework.lang.Nullable;
+    class User {
+        @Nullable
+        String name;
+  
+        @Nullable
+        public void show(@Nullable int mark){
+            System.out.print("111");
+        }
+    }
+  ```
+### Spring5支持函数式风格GenericApplicationContext
