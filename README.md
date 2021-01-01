@@ -19,9 +19,24 @@ spring framework 5.2.6 study
 - spring-orm-5.2.6.RELEASE.jar
 - spring-tx-5.2.6.RELEASE.jar
 - mysql-connector-java-8.0.21.jar
+- log4j-api-2.12.1.jar
+- log4j-core-2.12.1.jar
+- log4j-slf4j-impl-2.12.1.jar
+- slf4j-api-1.7.30.jar
+- spring-test-5.2.6.RELEASE.jar
+
 ## IOC
 1. 控制反转-把对象创建和对象之间的调用过程，交给spring管理
 2. 目的是降低耦合度
+3. 引入jar
+    - commons-logging-1.1.1.jar
+    - hamcrest-core-1.3.jar
+    - junit-4.13.jar
+    - spring-beans-5.2.6.RELEASE.jar
+    - spring-context-5.2.6.RELEASE.jar
+    - spring-core-5.2.6.RELEASE.jar
+    - spring-expression-5.2.6.RELEASE.jar
+    - druid-1.1.20.jar
 ### 底层原理
 1. xml解析、工厂模式、反射
 ### BeanFactory接口
@@ -115,7 +130,11 @@ spring framework 5.2.6 study
 ## AOP
 1. 面向切面编程，aop是oop的延续，利用aop可以对业务逻辑的各个部分进行隔离，从而使业务逻辑各部分之间耦合度降低，提高程序的可重复性，提高开发效率
 2. 场景：日志，性能统计，安全控制，事务处理，异常处理等从业务代码中分出来，可以在不修改源代码的情况下，增加主业务功能
-3. 引入spring-aspects-5.2.6.RELEASE.jar、aopalliance-1.0.jar、aspectjweaver-1.6.8.jar、cglib-2.2.2.jar
+3. 引入
+    - spring-aspects-5.2.6.RELEASE.jar 
+    - aopalliance-1.0.jar 
+    - aspectjweaver-1.6.8.jar
+    - cglib-2.2.2.jar
 ### 底层原理
 #### 动态代理
 ##### 有接口jdk动态代理
@@ -146,7 +165,11 @@ spring framework 5.2.6 study
 - execution(* org.bougainvillea.spring5.aop.Bean.*(..))对Bean下的所有方法增强
 ## JdbcTemplate
 1. Spring对JDBC进行封装，使用JdbcTemplate对数据库操作
-2. 引入jar mysql-connector-java-8.0.21.jar、spring-jdbc-5.2.6.RELEASE.jar、spring-tx-5.2.6.RELEASE.jar、spring-orm-5.2.6.RELEASE.jar
+2. 引入jar
+   - mysql-connector-java-8.0.21.jar
+   - spring-jdbc-5.2.6.RELEASE.jar
+   - spring-tx-5.2.6.RELEASE.jar
+   - spring-orm-5.2.6.RELEASE.jar
 ## Transaction
 - ACID
     - 原子性：不可分割，一组操作要么都成功，一个失败全部回滚
@@ -227,5 +250,10 @@ spring framework 5.2.6 study
 ### Spring5支持函数式风格GenericApplicationContext
 ### Spring5支持整合JUnit5
 #### 整合JUnit4
+- 引入jar
+    - hamcrest-core-1.3.jar
+    - junit-4.13.jar
 #### 整合JUnit5
-
+- 引入jar
+    - hamcrest-core-1.3.jar
+    - junit-4.13.jar
