@@ -254,6 +254,15 @@ spring framework 5.2.6 study
     - hamcrest-core-1.3.jar
     - junit-4.13.jar
 #### 整合JUnit5
-- 引入jar
-    - hamcrest-core-1.3.jar
-    - junit-4.13.jar
+- 引入jar使用idea自动引入JUnit5
+    1. 删除import org.junit.Test;
+    2. 在@Test注解上import JUnit5
+    3. jar
+       - apiguardian-api-1.0.0.jar
+       - junit-jupiter-5.4.2.jar
+       - junit-jupiter-api-5.4.2.jar
+       - junit-jupiter-engine-5.4.2.jar
+       - junit-jupiter-params-5.4.2.jar
+       - junit-platform-commons-1.4.2.jar
+       - junit-platform-engine-1.4.2.jar
+       - opentest4j-1.1.1.jar

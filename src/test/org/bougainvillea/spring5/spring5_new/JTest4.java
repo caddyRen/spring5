@@ -23,6 +23,7 @@ public class JTest4 {
 
     @Test
     public void testAdd(){
+        System.out.println("Spring5+JUnit4");
 //        ApplicationContext context=new ClassPathXmlApplicationContext("source/ioc/annotation/annotation.xml");
 //        UserService userService=context.getBean("userService",UserService.class);
         userService.add();
